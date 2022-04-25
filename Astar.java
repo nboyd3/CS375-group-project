@@ -11,12 +11,9 @@ public class Astar {
     }
 
     private int heristic(Node n1, Node n2) {
-        int distance;
         int ys = Math.abs(n1.getY() - n2.getY());
         int xs = Math.abs(n1.getX() - n2.getX());
-        //distance = (int) Math.hypot(ys, xs);
-        distance = ys + xs;
-        return distance;
+        return ys + xs;
     }
 
     private void findPath() {
