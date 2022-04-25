@@ -1,15 +1,15 @@
 import java.util.ArrayList;
 
 public class Node {
-    private int x;
-    private int y;
-    private int f;
+    private int x; // x position
+    private int y; // y position
+    private int f; // f = g + h
     private int g; // movement cost from start to node
     private int h; // estimated movement cost from node to finish
-    private boolean obstacle;
-    private ArrayList<Node> neighbors = new ArrayList<>();
-    private Node cameFrom;
-    private int path;
+    private boolean obstacle; // determines if node is valid or an obstacle
+    private ArrayList<Node> neighbors = new ArrayList<>(); // list of the node's neighbors
+    private Node cameFrom; // previous node (used for finding path)
+    private boolean path; // determines if node is part of the path
 
     public Node(int x, int y) {
         this.x = x;
@@ -19,7 +19,7 @@ public class Node {
         this.h = 0;
         this.obstacle = false;
         this.cameFrom = null;
-        this.path = 0;
+        this.path = false;
     }
 
     public void setF(int f) {
@@ -53,7 +53,7 @@ public class Node {
         this.cameFrom = cameFrom;
     }
 
-    public void setPath(int path) {
+    public void setPath(boolean path) {
         this.path = path;
     }
 
@@ -89,7 +89,7 @@ public class Node {
         return cameFrom;
     }
 
-    public int getPath() {
+    public boolean getPath() {
         return path;
     }
 

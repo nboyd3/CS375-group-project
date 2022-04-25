@@ -19,10 +19,10 @@ public class Astar {
     private void findPath() {
         Node curr = graph.getEnd();
         while (curr.getCameFrom() != null) {
-            curr.setPath(1);
+            curr.setPath(true);
             curr = curr.getCameFrom();
         }
-        graph.getStart().setPath(1);
+        graph.getStart().setPath(true);
         graph.printGraph();
     }
 
