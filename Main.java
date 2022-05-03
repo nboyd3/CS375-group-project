@@ -1,12 +1,13 @@
 public class Main {
 
     public static void main(String args[]) {
-
-        // creates new graph
-        Graph grid = new Graph(10, 0, 0, 9, 9);
+        
+        Graph eucledianGrid = new Graph(10, 0, 0, 9, 9, "Eucledian");
+        Graph manhattanGrid = new Graph(10, 0, 0, 9, 9, "Manhattan");
 
         // creates new Astar object using grid
-        Astar astar = new Astar(grid);
+        Astar astar = new Astar(manhattanGrid);
+        AStarEucl eucl = new AStarEucl(eucledianGrid);
 
         // times the algorithm
         double startTime = System.nanoTime();
@@ -14,6 +15,14 @@ public class Main {
         double endTime = System.nanoTime();
 
         double duration = (endTime - startTime);
+
+        System.out.format("%.2fms\n", duration / 1_000_000);
+
+        startTime = System.nanoTime();
+        eucl.run();
+        endTime = System.nanoTime();
+
+        duration = (endTime - startTime);
 
         System.out.format("%.2fms\n", duration / 1_000_000);
     }
