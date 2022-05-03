@@ -64,6 +64,7 @@ public class AStarEucl {
                         neighbor.setF(neighbor.getG() + neighbor.getH());
                         neighbor.setCameFrom(curr);
                     }                    
+
                 }
             }
             if (low == graph.getEnd()) {
