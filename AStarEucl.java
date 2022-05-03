@@ -29,7 +29,7 @@ public class AStarEucl {
     }
 
     public int run() {
-
+        double startTime = System.nanoTime();
         open.add(graph.getStart());
         while (open.size() > 0) {
 
@@ -39,7 +39,6 @@ public class AStarEucl {
                     low = n;
                 }
             }
-            //System.out.println();
             Node curr = low;
 
             closed.add(curr);
@@ -64,13 +63,16 @@ public class AStarEucl {
                         neighbor.setH((double) heristic(neighbor, graph.getEnd()));
                         neighbor.setF(neighbor.getG() + neighbor.getH());
                         neighbor.setCameFrom(curr);
-                    }
-                                        
+                    }                    
+
                 }
             }
             if (low == graph.getEnd()) {
+                double endTime = System.nanoTime();
+                double duration = (endTime - startTime);
                 findPath();
                 System.out.println("Found!");
+                System.out.format("%.2fms\n", duration / 1_000_000);
                 return 0;
             }
         }
