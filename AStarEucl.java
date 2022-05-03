@@ -21,7 +21,6 @@ public class AStarEucl {
         Node curr = graph.getEnd();
         while (curr.getCameFrom() != null) {
             curr.setPath(true);
-           // System.out.println(curr.getX()+","+curr.getY());
             curr = curr.getCameFrom();
         }
         graph.getStart().setPath(true);
@@ -30,24 +29,20 @@ public class AStarEucl {
     }
 
     public int run() {
-
+        double startTime = System.nanoTime();
         open.add(graph.getStart());
         while (open.size() > 0) {
 
             Node low = open.get(0);
             for (Node n : open) {
-                //System.out.print(n.getX()+","+n.getY()+": ");
                 if (n.getF() < low.getF()) {
                     low = n;
                 }
             }
-            //System.out.println();
             Node curr = low;
 
             closed.add(curr);
             open.remove(curr);
-            //if(curr!=graph.getStart())
-                //System.out.println(curr.getF()+": "+curr.getCameFrom().getX()+curr.getCameFrom().getY());
             ArrayList<Node> neighbors = curr.getNeighbors();
             for (int i = 0; i < neighbors.size(); i++) {
                 Node neighbor = neighbors.get(i);
@@ -65,26 +60,20 @@ public class AStarEucl {
                     } else {
                         neighbor.setG(tempG);
                         open.add(neighbor);
-                        //System.out.println("Quagmire");
                         neighbor.setH((double) heristic(neighbor, graph.getEnd()));
                         neighbor.setF(neighbor.getG() + neighbor.getH());
                         neighbor.setCameFrom(curr);
-                    }
-                    //
-                    
-                    //System.out.println(curr.getX()+","+curr.getY()+": "+neighbor.getX()+","+neighbor.getY()+":: "+neighbor.getF());
-                    
+                    }                    
                 }
-                //System.out.println(curr.getX()+","+curr.getY()+": "+i);
             }
-            // graph.printGraph();
-            // System.out.println("--------------------------------------");
             if (low == graph.getEnd()) {
+                double endTime = System.nanoTime();
+                double duration = (endTime - startTime);
                 findPath();
                 System.out.println("Found!");
+                System.out.format("%.2fms\n", duration / 1_000_000);
                 return 0;
             }
-            //System.out.println("-----------");
         }
 
         System.out.println("Not Found :(");

@@ -28,7 +28,7 @@ public class Astar {
     }
 
     public int run() {
-
+        double startTime = System.nanoTime();
         open.add(graph.getStart());
         while (open.size() > 0) {
 
@@ -68,8 +68,11 @@ public class Astar {
             }
 
             if (low == graph.getEnd()) {
+                double endTime = System.nanoTime();
+                double duration = (endTime - startTime);
                 findPath();
                 System.out.println("Found!");
+                System.out.format("%.2fms\n", duration / 1_000_000);
                 return 0;
             }
         }
