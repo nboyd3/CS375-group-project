@@ -16,5 +16,15 @@ public class Main {
         double duration = (endTime - startTime);
 
         System.out.format("%.2fms\n", duration / 1_000_000);
+
+        System.out.println("For BFS:\n");
+        startTime = System.nanoTime();
+
+        BFS bfs = new BFS(grid);
+        bfs.bfs();
+
+        endTime = System.nanoTime();
+        double duration2 = (endTime - startTime);
+        System.out.format("%.2fms\n", duration2 / 1_000_000);
     }
 }
