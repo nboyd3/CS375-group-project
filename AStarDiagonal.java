@@ -1,19 +1,21 @@
 import java.util.ArrayList;
 
-public class Astar {
+public class AStarDiagonal {
 
     private ArrayList<Node> open = new ArrayList<>();
     private ArrayList<Node> closed = new ArrayList<>();
     Graph graph;
 
-    public Astar(Graph graph) {
+    public AStarDiagonal(Graph graph) {
         this.graph = graph;
     }
 
-    private int heristic(Node n1, Node n2) {
-        int ys = Math.abs(n1.getY() - n2.getY());
-        int xs = Math.abs(n1.getX() - n2.getX());
-        return ys + xs;
+    private double heristic(Node n1, Node n2) {
+        double ys = Math.abs(n1.getY() - n2.getY());
+        double xs = Math.abs(n1.getX() - n2.getX());
+        //return ys + xs;
+        return (xs+ys)+(1.44-2)*Math.min(xs, ys);
+        //return Math.sqrt(ys*ys+xs*xs);
     }
 
     private void findPath() {
@@ -38,35 +40,34 @@ public class Astar {
                     low = n;
                 }
             }
-
             Node curr = low;
 
             closed.add(curr);
             open.remove(curr);
-
             ArrayList<Node> neighbors = curr.getNeighbors();
             for (int i = 0; i < neighbors.size(); i++) {
                 Node neighbor = neighbors.get(i);
                 if (!closed.contains(neighbor) && !neighbor.getObstacle()) {
                     double tempG = curr.getG() + 1;
-
+                    if(neighbor.getX()!=curr.getX()&&neighbor.getY()!=curr.getY())
+                        tempG=curr.getG()+1.44;
                     if (open.contains(neighbor)) {
                          if (tempG < neighbor.getG()) {
-                             neighbor.setG(tempG);
+                            neighbor.setG(tempG);
+                            neighbor.setH((double) heristic(neighbor, graph.getEnd()));
+                            neighbor.setF(neighbor.getG() + neighbor.getH());
+                            neighbor.setCameFrom(curr);
                          }
                     } else {
                         neighbor.setG(tempG);
                         open.add(neighbor);
-                    }
+                        neighbor.setH((double) heristic(neighbor, graph.getEnd()));
+                        neighbor.setF(neighbor.getG() + neighbor.getH());
+                        neighbor.setCameFrom(curr);
+                    }                    
 
-                    neighbor.setH((int) heristic(neighbor, graph.getEnd()));
-                    neighbor.setF(neighbor.getG() + neighbor.getH());
-                    neighbor.setCameFrom(curr);
-                    
                 }
-                
             }
-
             if (low == graph.getEnd()) {
                 double endTime = System.nanoTime();
                 double duration = (endTime - startTime);

@@ -3,9 +3,9 @@ import java.util.ArrayList;
 public class Node {
     public int x; // x position
     public int y; // y position
-    private int f; // f = g + h
-    private int g; // movement cost from start to node
-    private int h; // estimated movement cost from node to finish
+    private double f; // f = g + h
+    private double g; // movement cost from start to node
+    private double h; // estimated movement cost from node to finish
     private boolean obstacle; // determines if node is valid or an obstacle
     public ArrayList<Node> neighbors = new ArrayList<>(); // list of the node's neighbors
     private Node cameFrom; // previous node (used for finding path)
@@ -28,19 +28,45 @@ public class Node {
 
     }
 
-    public void setF(int f) {
+    public void setF(double f) {
         this.f = f;
     }
 
-    public void setG(int g) {
+    public void setG(double g) {
         this.g = g;
     }
 
-    public void setH(int h) {
+    public void setH(double h) {
         this.h = h;
     }
 
-    public void setNeighbors(Node[][] g, int d) {
+    public void setNeighborsDiag(Node[][] g, int d) {
+        if (x > 0) {
+            neighbors.add(g[x - 1][y]);
+        }
+        if (y > 0) {
+            neighbors.add(g[x][y - 1]);
+        }
+        if (x < d - 1) {
+            neighbors.add(g[x + 1][y]);
+        }
+        if (y < d - 1) {
+            neighbors.add(g[x][y + 1]);
+        }
+        if((x < d - 1)&&(y < d - 1)){
+            neighbors.add(g[x+1][y+1]);
+        }
+        if(x>0&&y>0){
+            neighbors.add(g[x-1][y-1]);
+        }
+        if(x>0&&y<d-1){
+            neighbors.add(g[x-1][y+1]);
+        }
+        if(y>0&&x<d-1){
+            neighbors.add(g[x+1][y-1]);
+        }
+    }
+    public void setNeighborsManhattan(Node[][] g, int d) {
         if (x > 0) {
             neighbors.add(g[x - 1][y]);
         }
@@ -75,15 +101,15 @@ public class Node {
         return y;
     }
 
-    public int getF() {
+    public double getF() {
         return f;
     }
 
-    public int getG() {
+    public double getG() {
         return g;
     }
 
-    public int getH() {
+    public double getH() {
         return h;
     }
 
