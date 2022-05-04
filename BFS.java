@@ -41,7 +41,6 @@ public class BFS {
         Node node = end;
         List<Node> route = new ArrayList<>();
         while(node != null){
-            node.setPath(true);
             route.add(node);
             node = node.prev;
         }

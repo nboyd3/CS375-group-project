@@ -25,18 +25,17 @@ public class Main {
             endTime = System.nanoTime();
             duration = (endTime - startTime);
             //System.out.format("%.2fms\n", duration / 1_000_000);
-            System.out.println("------------------------------------------------------");
 
-            System.out.format("%.2fms\n", duration / 1_000_000);
-            System.out.println("For BFS:\n");
+            System.out.println("BFS:");
             startTime = System.nanoTime();
 
             BFS bfs = new BFS(diagonalGrid);
             bfs.bfs();
-    
             endTime = System.nanoTime();
             double duration2 = (endTime - startTime);
             System.out.format("%.2fms\n", duration2 / 1_000_000);
+
+            System.out.println("------------------------------------------------------");
             }
     }
 }
