@@ -49,24 +49,24 @@ public class Graph {
         //         graph[1][i].setObstacle(true);
         
         /*Environment: Euclean runtme should be much longer*/
-        // for(int i=1; i<50; i++)
-        //     for(int j=0; j<49; j++)
-        //         graph[i][j].setObstacle(true);
-        // for(int i=0; i<48; i++)
-        //     graph[i][i].setObstacle(false);
+        for(int i=1; i<50; i++)
+            for(int j=0; j<49; j++)
+                graph[i][j].setObstacle(true);
+        for(int i=0; i<48; i++)
+            graph[i][i].setObstacle(false);
         /*Environment: random obstacles*/
-        // for(int i=0; i<50-1; i++){
-        //     int rand1 = (int)(Math.random() * 50 );
-        //     int rand2 = (int)(Math.random() * 50 );
-        //     graph[35][i].setObstacle(true);
-        // }
+        //  for(int i=0; i<50-1; i++){
+        // //     int rand1 = (int)(Math.random() * 50 );
+        // //     int rand2 = (int)(Math.random() * 50 );
+        //      graph[35][i].setObstacle(true);
+        //  }
         
            
         // get neighbors for all nodes
-        if(type=="Eucledian"){
+        if(type=="Diagonal"){
             for (int i = 0; i < deminsion; i++) {
                 for (int j = 0; j < deminsion; j++) {
-                    graph[i][j].setNeighborsEucl(graph, deminsion);
+                    graph[i][j].setNeighborsDiag(graph, deminsion);
                 }
             }
         }

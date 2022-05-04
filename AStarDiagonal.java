@@ -1,12 +1,12 @@
 import java.util.ArrayList;
 
-public class AStarEucl {
+public class AStarDiagonal {
 
     private ArrayList<Node> open = new ArrayList<>();
     private ArrayList<Node> closed = new ArrayList<>();
     Graph graph;
 
-    public AStarEucl(Graph graph) {
+    public AStarDiagonal(Graph graph) {
         this.graph = graph;
     }
 
@@ -14,7 +14,8 @@ public class AStarEucl {
         double ys = Math.abs(n1.getY() - n2.getY());
         double xs = Math.abs(n1.getX() - n2.getX());
         //return ys + xs;
-        return Math.sqrt(ys*ys+xs*xs);
+        return (xs+ys)+(1.44-2)*Math.min(xs, ys);
+        //return Math.sqrt(ys*ys+xs*xs);
     }
 
     private void findPath() {

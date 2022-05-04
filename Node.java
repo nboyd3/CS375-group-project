@@ -34,7 +34,7 @@ public class Node {
         this.h = h;
     }
 
-    public void setNeighborsEucl(Node[][] g, int d) {
+    public void setNeighborsDiag(Node[][] g, int d) {
         if (x > 0) {
             neighbors.add(g[x - 1][y]);
         }
