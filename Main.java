@@ -65,16 +65,14 @@ public class Main {
                 myWriter.write("\n");
 
                 myWriter.write("BFS:\n");
-
-                double startTime = System.nanoTime();
     
                 BFS bfs = new BFS(diagonalGridBFS);
                 bfs.bfs();
                 myWriter.write(diagonalGridBFS.result);
+                myWriter.write(String.format("Found\n%.2f units\n", bfs.length));
+
                 
-                double endTime = System.nanoTime();
-                double duration2 = (endTime - startTime);
-                myWriter.write(String.format("%.2fms\n", duration2 / 1_000_000));
+                myWriter.write(bfs.result);
                 //System.out.format("%.2fms\n", duration2 / 1_000_000);
     
                 myWriter.write("------------------------------------------------------\n");
