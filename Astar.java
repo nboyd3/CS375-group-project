@@ -5,9 +5,11 @@ public class Astar {
     private ArrayList<Node> open = new ArrayList<>();
     private ArrayList<Node> closed = new ArrayList<>();
     Graph graph;
+    String result;
 
     public Astar(Graph graph) {
         this.graph = graph;
+        this.result = "";
     }
 
     private int heristic(Node n1, Node n2) {
@@ -24,7 +26,8 @@ public class Astar {
         }
         graph.getStart().setPath(true);
         graph.printGraph();
-        System.out.format("%.2f units\n",graph.getEnd().getG());
+        //System.out.format("%.2f units\n",graph.getEnd().getG());
+        result += String.format("%.2f units\n",graph.getEnd().getG());
     }
 
     public int run() {
@@ -71,13 +74,18 @@ public class Astar {
                 double endTime = System.nanoTime();
                 double duration = (endTime - startTime);
                 findPath();
-                System.out.println("Found!");
-                System.out.format("%.2fms\n", duration / 1_000_000);
-                return 0;
+                //System.out.println("Found!");
+                //System.out.format("%.3fms\n", duration / 1_000_000);
+                result += String.format("%.3fms\n", duration / 1_000_000);
+                return 1;
             }
         }
-
-        System.out.println("Not Found :(");
+        
+        double endTime = System.nanoTime();
+        double duration = (endTime - startTime);
+        //System.out.println("Not Found :(");
+        //System.out.format("%.3fms\n", duration / 1_000_000);
+        result += String.format("%.3fms\n", duration / 1_000_000);
         return 0;
     }
 

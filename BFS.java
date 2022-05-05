@@ -5,6 +5,7 @@ public class BFS {
 
     Node start, end;
     Graph graph;
+    String result;
     
     public BFS(Graph graph){
         this.start = graph.getStart();
